@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "testadfakhil123"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
+		"AzureDatabricks2_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks2'"
+		},
+		"sharingIR_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'sharingIR'"
+		},
+		"sharingIR_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagedatafactoryakhil.dfs.core.windows.net/"
+		},
+		"IRsharing_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/544e5b2c-a8c0-46e7-881c-735f40b0f44a/resourcegroups/ADF_resource/providers/Microsoft.DataFactory/factories/adfakhill/integrationruntimes/ir-selfhosted"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "testadfakhil123_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"AzureDatabricks2_accessToken": {
+						"value": "[parameters('AzureDatabricks2_accessToken')]"
+					},
+					"sharingIR_accountKey": {
+						"value": "[parameters('sharingIR_accountKey')]"
+					},
+					"IRsharing_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('IRsharing_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"sharingIR_properties_typeProperties_url": {
+						"value": "[parameters('sharingIR_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
