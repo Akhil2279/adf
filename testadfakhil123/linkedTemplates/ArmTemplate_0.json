@@ -178,7 +178,7 @@
 						"typeProperties": {
 							"notebookPath": "/Users/2401600056mca@gmail.com/practice",
 							"baseParameters": {
-								"input": "hii"
+								"\"input\"": "\"akhil\""
 							}
 						},
 						"linkedServiceName": {
